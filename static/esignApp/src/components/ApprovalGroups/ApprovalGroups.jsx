@@ -229,28 +229,16 @@ export default function ApprovalGroups() {
       console.log(formUserAccountId);
       console.log(loggedUser.accountId);
 
-      var currentUsername = formData.username;
-      var pwd = formData.password;
       var authenticated = false;
       
       
       let details = {
-        'client_id': '0990b18a-4ad0-44ef-a842-1d0b7083cc79',
-        'scope': 'user.read openid profile offline_access',
-        'client_secret': '8Mi8Q~z8e-BEdpLVJiEzSJr0EfFrr3OFn9F~HcMs',
-        'username':'johnson.j@archimedis.io',
-        'password':'prkstr@9112',
-        'grant_type':'password'
+        'clientID':'0990b18a-4ad0-44ef-a842-1d0b7083cc79',
+        'tenantID':'f73264f6-5797-4035-9dbd-5803190f1a70',
+        'username':username,
+        'password':password
     }
 
-    
-      var formBody = [];
-      for (var property in details) {
-        var encodedKey = encodeURIComponent(property);
-        var encodedValue = encodeURIComponent(details[property]);
-        formBody.push(encodedKey + "=" + encodedValue);
-      }
-      formBody = formBody.join("&");
 
       const issueDetails = await invoke("getIssueDetails");
       let creatorId = issueDetails.fields.creator.accountId;
@@ -262,16 +250,12 @@ export default function ApprovalGroups() {
       }else{
         try{
           
-          apiS = await postROPC(MyConstClass.OktaAuthURL,formBody);
+          apiS = await postJson(MyConstClass.JavaService,details);
         }catch{
           setInValidUserMessage("Invalid Credentials");
         }
-        let status = apiS.status;
-        if(status==undefined){
-          status='Unauthorized';  
-        }
-        
-        if(status=="SUCCESS"){
+
+        if(apiS){
           authenticated = true;
         }
       }
