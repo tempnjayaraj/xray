@@ -1,0 +1,238 @@
+.App {
+  text-align: center;
+}
+
+.no-history {
+  min-height: 400px;
+}
+.with-history {
+  min-height: 260px;
+}
+.App-logo {
+  height: 40vmin;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+.MuiListItemIcon-root {
+  min-width: 40px !important;
+}
+.App-link {
+  color: #09d3ac;
+}
+.header-nav {
+  padding: 0.75rem;
+}
+.header-nav > a {
+  color: #fff !important;
+  text-decoration: none;
+}
+.active {
+  border-bottom: 2px solid #c51162;
+}
+.MuiButton-root {
+  text-transform: none !important;
+}
+.MuiToolbar-regular {
+  min-height: 48px !important;
+}
+.MuiAutocomplete-inputRoot[class*="MuiFilledInput-root"] {
+  padding-top: 0 !important;
+  padding-left: 8px;
+}
+.MuiFilledInput-input {
+  padding: 17px 12px 10px !important;
+}
+.MuiTextField-root {
+  width: 100%;
+}
+.MuiTooltip-tooltip {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 1px #cccccc solid !important;
+  font-size: 13px !important;
+  line-height: 22px !important;
+}
+.MuiTooltip-tooltip p {
+  margin-bottom: 0px;
+  margin-left: 0px;
+}
+.MuiExpansionPanelSummary-root {
+  padding: 0 20px 0 0px !important;
+}
+.table thead th {
+  font-size: 0.75rem;
+}
+.MuiTypography-h6 {
+  font-size: 1.25em !important;
+}
+.panel1a-header {
+  min-height: 45px !important;
+}
+.MuiExpansionPanel-root.Mui-expanded {
+  margin: 0px 0 !important;
+}
+@media (min-width: 600px) {
+  .makeStyles-drawerHeader-170 {
+    min-height: 48px !important;
+  }
+}
+.MuiDialogTitle-root {
+  border-bottom: 1px solid #efefef;
+}
+.list-header {
+  font-size: 12px;
+  min-height: 23px;
+  margin-bottom: 3px;
+  padding: 3px;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+
+.category-header h4 {
+  font-size: 0.875em;
+  text-transform: uppercase;
+  font-weight: bold;
+  /* inline-size: 14px; */
+  line-height: 15px;
+}
+.info {
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  bottom: 20%;
+}
+
+.cardDetails-group {
+  margin-bottom: 8px;
+  position: relative;
+}
+.cardDetails-pillar--main {
+  width: 61.5%;
+  padding-right: 30px;
+}
+
+@media (min-width: 40em) {
+  .cardDetails .cardDetails-scroll > .cardDetails-pillar {
+    margin: 0;
+    float: left;
+  }
+}
+.MuiDialog-paper {
+  width: 60%;
+}
+
+.gridBorder {
+  border-right: 1px solid #e0e0e0;
+}
+.cardContainerLabel {
+  font-size: 0.8125rem;
+  font-weight: bolder;
+  display: block;
+  margin: -1px 0 4px 2px;
+  padding: 0;
+  color: #444;
+}
+.sortField .MuiSelect-selectMenu {
+  padding-right: 40px !important;
+}
+
+.generaltype-header {
+  color: #fff;
+  font-weight: bold;
+  padding: 2px 7px 6px 4px;
+  line-height: 1;
+  /* background-color:rgba(0, 79, 97, 0.7); */
+}
+
+.header-truncate {
+  max-width: 100%;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+.svgIcon--calendar.is-warning {
+  fill: #fac80a;
+}
+
+svg:not(:root) {
+  overflow: hidden;
+}
+.svgIcon {
+  display: inline-block;
+  color: #fff;
+  height: inherit;
+  width: inherit;
+}
+.pull-right {
+  float: right;
+}
+
+a.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-colorInherit:hover {
+  color: inherit;
+}
+
+table.MuiTable-root {
+  width: 100%;
+  display: table;
+  border-spacing: 0;
+  border-collapse: collapse;
+  border: 1px solid rgba(224, 224, 224, 1) !important;
+}
+
+.MuiPaper-root.MuiTableContainer-root.MuiPaper-elevation1 {
+  box-shadow: none;
+}
+tbody > tr {
+  background-color: white !important;
+}
+.signoutLoader {
+  opacity: 0.8;
+}
+.MuiTableCell-root {
+  display: table-cell !important;
+  padding: 10px !important;
+  font-size: 0.8rem !important;
+  text-align: left;
+  font-weight: 400;
+  letter-spacing: 0.01071em;
+  vertical-align: inherit;
+}
+th[role="columnheader"],
+th[scope="col"] {
+  background-color: #405370 !important;
+  color: white;
+}
+
+.jss49 {
+  color: #fff !important;
+  /* background-color: #405370 !important; */
+  font-weight: 400 !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif !important;
+}
+.jss50 {
+  font-weight: 400 !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif !important;
+}
+#loginPassword {
+  -webkit-text-security: disc;
+}
+.strong-pwd {
+  border: 1px solid green;
+}
+.medium-pwd {
+  border: 1px solid orange;
+}
+.week-pwd {
+  border: 1px solid red;
+}
