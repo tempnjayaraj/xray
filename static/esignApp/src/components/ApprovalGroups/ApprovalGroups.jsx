@@ -221,51 +221,85 @@ export default function ApprovalGroups() {
 
       let username = formData.username;
       let password = formData.password;
+
+      let userSSOResponse = postJson(MyConstClass.CheckSSOURL,{"username":username});
+      let userSSO;
+      if(userSSOResponse){
+        userSSO = userSSOResponse.SSO;
+        // console.log(userSSO);
+      }
+      console.log("User SSO Status "+JSON.stringify(userSSOResponse));
+
       const userDet = await invoke("getUserAccountId", {emailID:username});
       let formUserAccountId;
       if(userDet.length!=0){
         formUserAccountId = userDet[0].id;  
       }
-      console.log(formUserAccountId);
-      console.log(loggedUser.accountId);
-
       var authenticated = false;
       
-      
-      let details = {
-        'clientID':'0990b18a-4ad0-44ef-a842-1d0b7083cc79',
-        'tenantID':'f73264f6-5797-4035-9dbd-5803190f1a70',
-        'username':username,
-        'password':password
-    }
-
-
       const issueDetails = await invoke("getIssueDetails");
       let creatorId = issueDetails.fields.creator.accountId;
       let apiS;
-
-    if(loggedUser.accountId==formUserAccountId){
-      if(formUserAccountId==creatorId){
-        setInValidUserMessage("Creator cannot be the reviewer");
+      if(!formUserAccountId){
+        setInValidUserMessage("Username not valid");
       }else{
-        try{
+        if(loggedUser.accountId==formUserAccountId){
+          if(formUserAccountId==creatorId){
+            setInValidUserMessage("Creator cannot be the reviewer");
+          }else{
+            try{
+              // console.log('Inside try block');
+             if(userSSO=="Azure"){
+              // console.log('Inside Azure block');
+              console.log("I am trying to hit Azure Auth")
+              let azureReqBody = {
+                'clientID':'0990b18a-4ad0-44ef-a842-1d0b7083cc79',
+                'tenantID':'f73264f6-5797-4035-9dbd-5803190f1a70',
+                'username':username,
+                'password':password
+              }
+              apiS = await postJson(MyConstClass.AzureAuthenticationURL,azureReqBody);  
+              if(apiS){
+                authenticated = true;
+              }else{
+                setInValidUserMessage("Invalid Credentials provided");
+              }
+             }else if(userSSO=="Okta"){
+              console.log("I am trying to hit Okta Auth");
+              let oktaReqBody = {
+                      "username": username,
+                      "password": password,
+                      "options": {
+                      "multiOptionalFactorEnroll": false,
+                      "warnBeforePasswordExpired": true
+                    }  
+                  }
+              apiS = await postJson(MyConstClass.OktaAuthURL,oktaReqBody);  
+              let status = apiS.status;
+              if(status==undefined){
+                status='Unauthorized';  
+              }
+              
+              if(status=="SUCCESS"){
+                authenticated = true;
+              }else{
+                setInValidUserMessage("Invalid Credentials provided");
+              }
+             }else{
+              setInValidUserMessage("The user is not configured under any SSO");
+             }
+              
+            }catch{
+              setInValidUserMessage("Invalid Credentials");
+            }
+       
+          }
           
-          apiS = await postJson(MyConstClass.JavaService,details);
-        }catch{
-          setInValidUserMessage("Invalid Credentials");
-        }
-
-        if(apiS){
-          authenticated = true;
+        }else{
+          setInValidUserMessage("Please provide credentials for the logged in user");
         }
       }
-      
-    }else if(!formUserAccountId){
-      setInValidUserMessage("Username not valid");
-    }
-    else{
-      setInValidUserMessage("Please provide credentials for the logged in user");
-    }
+   
     
 
       // userDetails.map((user) => {

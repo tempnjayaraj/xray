@@ -78,6 +78,7 @@ permissions:
         - "*.azurewebsites.net"
         - "*.azuremicroservices.io"
         - "https://login.microsoftonline.com"
+        - "*.okta.com"
       backend:
         - "*.atlassian.com"
         - "*.atlassian.net"
