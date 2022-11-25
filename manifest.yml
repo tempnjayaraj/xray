@@ -43,6 +43,12 @@ modules:
       name: Testcase status Validator
       description: Validate the mapped testcase are approved in test execution issue type.
       function: testcaseValidator
+  trigger:
+    - key: issue-tracker-trigger
+      function: issueevents
+      events:
+        - avi:jira:created:issuelink
+        - avi:jira:deleted:issuelink
   function:
     - key: resolver
       handler: index.handler
@@ -52,12 +58,14 @@ modules:
       handler: index.categoryValidate
     - key: testcaseValidator
       handler: index.testcaseValidator
+    - key: issueevents
+      handler: index.issueEvents
 resources:
   - key: main
     path: static/esignApp/build
 
 app:
-  id: ari:cloud:ecosystem::app/aebc84bd-74e3-4ed9-86c7-db9bc6496672
+  id: ari:cloud:ecosystem::app/88d1064a-646c-418b-9989-d5b42560ccfb
 permissions:
   scopes:
     - read:jira-user

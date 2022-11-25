@@ -4,7 +4,63 @@ import * as Myconstants from "./appConstants";
 import axios from 'axios';
 import { storage } from '@forge/api';
 const resolver = new Resolver();
-//const context = useProductContext(); 
+// const context = new useProductContext(); 
+function getJson(api) {
+  var xhReq = new XMLHttpRequest();
+  xhReq.open("GET", api, false);
+  xhReq.send(null);
+  var jsonObject = JSON.parse(xhReq.responseText);
+  return jsonObject;
+}
+export const issueEvents = async (event, context ,req) => {
+  // console.log("event issue id "+JSON.stringify(context));
+  // console.log("event issue id "+JSON.stringify(req));
+  // console.log("Current Issue ID - "+event.issue.id);
+  // console.log("Current Status "+event.issue.fields.status.name);
+  // const result = await API
+  // .asApp()
+  // .requestJira(
+  //   route`/rest/api/2/issue/${event.issue.id}?fields=*all&expand=operations,schema`);
+
+
+    // console.log("Current Issue "+JSON.stringify(result));
+
+  // const data = await result.json()
+  // const outputValue = JSON.stringify(data);
+  // console.log(outputValue);
+
+  
+  console.log(JSON.stringify(event));
+  console.log(JSON.stringify(context));
+  console.log(JSON.stringify(req));
+  
+  let isCreationEvent = false;
+  // console.log(event.eventType);
+  if(event.eventType=="avi:jira:deleted:issuelink"){
+    // console.log('Inside delte block');
+    isCreationEvent = false;
+  }else if(event.eventType=="avi:jira:created:issuelink"){
+    isCreationEvent = true;
+    // console.log('Inside create block');
+  }
+  let IssueID = event.destinationIssueId;
+  let testSetID = event.sourceIssueId;
+  if(isCreationEvent){
+    console.log("This is a creation event");
+    console.log("User is trying to link the TestSet "+testSetID+" to the issue "+IssueID);
+    const response = await API.asApp().requestJira(route`/rest/api/2/issue/${IssueID}`, {
+      headers: {
+        'Accept': 'application/json',
+      }
+    });
+    let gopal=await response.json();
+    console.log("Issue "+IssueID+" is currently in "+ gopal.fields.status.statusCategory.name+ " state");
+    
+  }else{
+    console.log("This is a deletion event");
+  }
+
+};
 let key = "jira.user.name"
 resolver.define("getLoggedUserDetails", async ({ payload, context }) => {
   let accountId = context.accountId;
